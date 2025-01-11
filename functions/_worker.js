@@ -191,12 +191,17 @@ const html = `
     body { 
       font-family: system-ui, -apple-system, sans-serif;
       background: #f5f5f5;
-      padding: 20px;
       line-height: 1.5;
+      min-height: 100vh;
     }
     .container {
       max-width: 800px;
       margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 20px;
     }
     .card {
       background: white;
@@ -306,13 +311,6 @@ const html = `
       from { transform: translateX(100%); opacity: 0; }
       to { transform: translateX(0); opacity: 1; }
     }
-    @media (max-width: 600px) {
-      body { padding: 10px; }
-      .card { padding: 15px; }
-      .btn-group { flex-direction: column; }
-      .btn { width: 100%; text-align: center; }
-      .file-info { padding-right: 8px; }
-    }
     .empty-state {
       text-align: center;
       padding: 32px;
@@ -321,13 +319,42 @@ const html = `
     .login-form {
       display: none;
       flex-direction: column;
-      gap: 8px;
+      gap: 16px;
+      max-width: 400px;
+      margin: 0 auto;
+      width: 100%;
     }
     .login-form input {
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 14px;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+    .login-form input:focus {
+      outline: none;
+      border-color: #2563eb;
+    }
+    .login-form .btn {
+      padding: 12px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .login-form .title {
+      text-align: center;
+      color: #1f2937;
+      font-size: 28px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 600px) {
+      body { padding: 10px; }
+      .card { padding: 15px; }
+      .btn-group { flex-direction: column; }
+      .btn { width: 100%; text-align: center; }
+      .file-info { padding-right: 8px; }
+      .container { padding: 16px; }
+      .login-form { max-width: 100%; }
+      .login-form .title { font-size: 24px; }
     }
   </style>
 </head>
@@ -335,8 +362,8 @@ const html = `
   <div class="container">
     <div class="card login-form" id="login-form">
       <div class="title">管理员登录</div>
-      <input type="text" id="username" placeholder="用户名">
-      <input type="password" id="password" placeholder="密码">
+      <input type="text" id="username" placeholder="用户名" autocomplete="username">
+      <input type="password" id="password" placeholder="密码" autocomplete="current-password">
       <button class="btn" id="login-button">登录</button>
     </div>
 
@@ -512,6 +539,13 @@ const html = `
       uploadCard.style.display = 'none';
       historyCard.style.display = 'none';
     }
+
+    // 添加回车键登录支持
+    document.getElementById('password').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        document.getElementById('login-button').click();
+      }
+    });
   </script>
 </body>
 </html>
