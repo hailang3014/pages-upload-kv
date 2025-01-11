@@ -22,9 +22,9 @@
 
 ## 部署说明
 
-1. Fork 本仓库
+1. 下载_worker.js压缩一下
 2. 在 Cloudflare Pages 中创建新项目
-3. 连接 GitHub 仓库
+3. 上传压缩包
 4. 配置环境变量：
    - ADMIN_USERNAME
    - ADMIN_PASSWORD
