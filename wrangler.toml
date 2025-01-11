@@ -1,11 +1,10 @@
 name = "text-share"
-main = "functions/_worker.js"
 compatibility_date = "2024-01-11"
 
-kv_namespaces = [
-  { binding = "FILE_STORAGE", id = "你的KV命名空间ID" }
-]
-
 [vars]
-ADMIN_USERNAME = "本地测试用户名"
-ADMIN_PASSWORD = "本地测试密码"
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "password"
+
+[[kv_namespaces]]
+binding = "FILE_STORAGE"
+id = "your-kv-namespace-id"
